@@ -28,6 +28,7 @@ def create_app(test_config=None):
     migrate.init_app(app, db)
 
     # Register Blueprints here
+    from .routes.recycler_routes import recycler_bp
     
     CORS(app)
     return app
