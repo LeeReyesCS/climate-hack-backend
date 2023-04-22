@@ -22,7 +22,7 @@ def create_app(test_config=None):
             "SQLALCHEMY_DATABASE_URI")
 
     # Import models here for Alembic setup
-
+    from app.models.recycler import Recycler
 
     db.init_app(app)
     migrate.init_app(app, db)
