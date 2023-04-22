@@ -1,8 +1,8 @@
-"""another folder again
+"""deleted database
 
-Revision ID: e3a29fc2b60e
+Revision ID: 2be30aab03b1
 Revises: 
-Create Date: 2023-04-22 17:30:52.026920
+Create Date: 2023-04-22 14:44:16.307600
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e3a29fc2b60e'
+revision = '2be30aab03b1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,9 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('zipcode', sa.Integer(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
+    sa.Column('cans', sa.Integer(), nullable=True),
+    sa.Column('plastic', sa.Integer(), nullable=True),
+    sa.Column('glass', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('recycler_id')
     )
     # ### end Alembic commands ###

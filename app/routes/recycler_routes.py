@@ -30,7 +30,7 @@ def get_all_recycles():
 
 @recycler_bp.route("/<recycler_id>", methods=["GET"])
 def get_one_order(recycler_id):
-    order = Order.query.get(recycler_id)
+    order = Recycler.query.get(recycler_id)
     order_response = {"Order": order.to_dict() }
     return jsonify(order_response),200
 
@@ -41,7 +41,7 @@ def get_one_order(recycler_id):
 def create_recycler():
     request_body = request.get_json()
     if "name" not in request_body or "zipcode" not in request_body or "email" not in request_body:
-        return make_response({"details":"Invalid data"},400)    
+        return jsonify({"details":"Invalid data"},400)    
     new_recycle = Recycler(
             name = request_body["name"],
             zipcode = request_body["zipcode"],
@@ -55,7 +55,7 @@ def create_recycler():
     db.session.commit()
     response = {"Order":new_recycle.to_dict()}
 
-    return make_response(jsonify(task_response),201)
+    return jsonify(response),201
 
 
 @recycler_bp.route("/<recycler_id>", methods=["DELETE"])
