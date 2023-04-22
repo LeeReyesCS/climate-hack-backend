@@ -29,6 +29,6 @@ def create_app(test_config=None):
 
     # Register Blueprints here
     from .routes.recycler_routes import recycler_bp
-    
+    app.register_blueprint(recycler_bp)
     CORS(app)
     return app

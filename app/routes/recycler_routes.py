@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 from app import db
 from app.models.recycler import Recycler
+
 
 recycler_bp = Blueprint('recycler', __name__, url_prefix='/recycler')
 
@@ -40,22 +41,22 @@ def get_one_order(recycler_id):
 @recycler_bp.route("", methods=["POST"])
 def create_recycler():
     request_body = request.get_json()
-    if "name" not in request_body or "zipcode" not in request_body or "email" not in request_body:
-        return jsonify({"details":"Invalid data"},400)    
+    # if "name" not in request_body or "zipcode" not in request_body or "email" not in request_body:
+    #     return jsonify({"details":"Invalid data"},400)    
     new_recycle = Recycler(
-            name = request_body["name"],
-            zipcode = request_body["zipcode"],
-            email = request_body["email"],
-            cans = request_body["cans"],
-            plastic = request_body["plastic"],
-            glass = request_body["glass"]
+            name=request_body["name"],
+            email=request_body["email"],
+            zipcode=request_body["zipcode"],
+            cans=request_body["cans"],
+            plastic=request_body["plastic"],
+            glass=request_body["glass"]
     )
+    response = {"Order":new_recycle.to_dict()}
 
     db.session.add(new_recycle)
     db.session.commit()
-    response = {"Order":new_recycle.to_dict()}
 
-    return jsonify(response),201
+    return make_response(jsonify(response),201)
 
 
 @recycler_bp.route("/<recycler_id>", methods=["DELETE"])
