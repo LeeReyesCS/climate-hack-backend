@@ -61,9 +61,9 @@ def create_recycler():
 
 @recycler_bp.route("/<recycler_id>", methods=["DELETE"])
 def delete_recycler(recycler_id):
-    recylcler = Recycler.query.get(recycler_id)
+    recycler = Recycler.query.get(recycler_id)
 
-    db.session.delete(recycler_id)
+    db.session.delete(recycler)
     db.session.commit()
     
     return {"recycler_deleted":recycler.to_dict()}
